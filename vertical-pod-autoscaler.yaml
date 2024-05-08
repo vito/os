@@ -1,6 +1,6 @@
 package:
   name: vertical-pod-autoscaler
-  version: 1.1.0
+  version: 1.1.1
   epoch: 1
   description: Autoscaling components for Kubernetes
   copyright:
@@ -19,11 +19,11 @@ pipeline:
     with:
       repository: https://github.com/kubernetes/autoscaler
       tag: vertical-pod-autoscaler-${{package.version}}
-      expected-commit: 7803cdd59777b04f6b9c1875d747a0e32e92cd56
+      expected-commit: b3968952906c3e523a2913b27e555080c031a458
 
   - uses: go/bump
     with:
-      deps: google.golang.org/protobuf@v1.33.0
+      deps: google.golang.org/protobuf@v1.33.0 golang.org/x/net@v0.23.0
       modroot: vertical-pod-autoscaler
 
   - uses: go/build
@@ -35,7 +35,7 @@ pipeline:
 
   - uses: go/bump
     with:
-      deps: google.golang.org/protobuf@v1.33.0
+      deps: google.golang.org/protobuf@v1.33.0 golang.org/x/net@v0.23.0
       modroot: vertical-pod-autoscaler
 
   - uses: go/build

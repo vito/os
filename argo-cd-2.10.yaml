@@ -1,6 +1,6 @@
 package:
   name: argo-cd-2.10
-  version: 2.10.7
+  version: 2.10.9
   epoch: 1
   description: Declarative continuous deployment for Kubernetes.
   copyright:
@@ -24,7 +24,11 @@ pipeline:
     with:
       repository: https://github.com/argoproj/argo-cd
       tag: v${{package.version}}
-      expected-commit: b060053b099b4c81c1e635839a309c9c8c1863e9
+      expected-commit: c071af808170bfc39cbdf6b9be4d0212dd66db0c
+
+  - uses: patch
+    with:
+      patches: tls-cipher-removed.patch
 
   - uses: go/bump
     with:

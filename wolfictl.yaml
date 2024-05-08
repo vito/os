@@ -1,7 +1,7 @@
 package:
   name: wolfictl
-  version: 0.16.1
-  epoch: 0
+  version: 0.16.7
+  epoch: 1
   description: Helper CLI for managing Wolfi
   copyright:
     - license: Apache-2.0
@@ -15,8 +15,14 @@ pipeline:
     with:
       repository: https://github.com/wolfi-dev/wolfictl
       tag: v${{package.version}}
-      expected-commit: 479208657c46678c6b5e70e745211589c675cb65
+      expected-commit: a1337c0ae3d0394c908edf3bb370b21036f461e3
       destination: wolfictl
+
+  - uses: go/bump
+    with:
+      deps: github.com/opencontainers/runc@v1.2.0-rc.1
+      replaces: github.com/mholt/archiver/v3=github.com/anchore/archiver/v3@v3.5.2
+      modroot: wolfictl
 
   - uses: go/build
     with:

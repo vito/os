@@ -1,6 +1,6 @@
 package:
   name: pulumi
-  version: 3.113.3
+  version: 3.115.2
   epoch: 1
   description: Infrastructure as Code in any programming language
   copyright:
@@ -26,14 +26,9 @@ pipeline:
   - uses: git-checkout
     with:
       destination: ${{package.name}}
-      expected-commit: 75340dd94203da02e44ca5f8beb55d9063d302ef
+      expected-commit: 95f06deccd0fc1d1bf04108a8a5ec1722e7bc039
       repository: https://github.com/pulumi/pulumi.git
       tag: v${{package.version}}
-
-  - uses: go/bump
-    with:
-      deps: golang.org/x/net@v0.23.0
-      modroot: ${{package.name}}/pkg
 
   - pipeline:
       - runs: |

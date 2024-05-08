@@ -1,6 +1,6 @@
 package:
   name: vim
-  version: 9.1.0366
+  version: 9.1.0398
   epoch: 0
   description: "Improved vi-style text editor"
   copyright:
@@ -18,10 +18,11 @@ environment:
       - wolfi-base
 
 pipeline:
-  - uses: fetch
+  - uses: git-checkout
     with:
-      uri: https://github.com/vim/vim/archive/v${{package.version}}.tar.gz
-      expected-sha256: ca8e997bda08dfc0c21f8821b2e7770f79203ff09239ebd0d4a4a6aad9ce39cc
+      repository: https://github.com/vim/vim
+      tag: v${{package.version}}
+      expected-commit: 9937d8b61922a02311509fb3352583d9e8c54885
 
   - runs: |
       # vim seems to manually set FORTIFY_SOURCE=1, and setting both breaks the build

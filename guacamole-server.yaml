@@ -92,6 +92,37 @@ subpackages:
     pipeline:
       - uses: split/dev
 
+test:
+  environment:
+    contents:
+      packages:
+        - busybox
+  pipeline:
+    - name: "check -v output"
+      runs: |
+        guacd -v >out 2>&1 || {
+          rc=$?
+          echo "failed [$rc]: guacd -v"
+          cat out
+          exit $rc
+        }
+        expected="version ${{package.version}}"
+        grep "$expected" out || {
+          echo "command 'guacd -v' did not contain expected output"
+          echo "expected: $expected"
+          echo "actual:"
+          cat out
+          exit 1
+        }
+    - name: "start daemon on localhost"
+      uses: test/daemon-check-output
+      with:
+        start: "guacd -b 127.0.0.1 -L info -p my.pid -f"
+        timeout: 60
+        expected_output: |
+          istening on host
+          Guacamole proxy daemon.*version ${{package.version}}
+
 update:
   enabled: true
   release-monitor:
